@@ -21,6 +21,8 @@ async function openCard(pokemon) {
     const moves = await getMoves(pokemon);
     const formattedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
+    const types = pokemon.types.map(t => t.type.name).join(', ');
+
     modalContent.innerHTML = `
         <button onclick="closeModal()">
             <img src="assets/img/x.png" alt="Close" style="width: 20px; height: 20px;">
@@ -36,6 +38,7 @@ async function openCard(pokemon) {
             <p>Height: ${pokemon.height / 10} m</p>
             <p>Weight: ${pokemon.weight / 10} kg</p>
             <p>Base Experience: ${pokemon.base_experience}</p>
+            <p>Typ: ${types}</p>
         </div>
         <div id="stats" class="tab-content hidden">
             <p>HP: ${pokemon.stats[0].base_stat}</p>
@@ -44,11 +47,14 @@ async function openCard(pokemon) {
             <p>Speed: ${pokemon.stats[5].base_stat}</p>
         </div>
         <div id="attacks" class="tab-content hidden">
-            ${moves.map(move => `
-                <p>${move.name}: ${move.power || '0'} dmg</p>
-            `).join('')}
+            ${moves.map(move =>
+        `<p>${move.name}: ${move.power} dmg</p>`
+    ).join('')}
+        </div>
+        <div class="change-card">
+            <button onclick="showPreviousPokemon()">Zurück</button>
+            <button onclick="showNextPokemon()">Vor</button>
         </div>
     `;
+    currentPokemonIndex = allPokemons.findIndex(p => p.id === pokemon.id);
 }
-
-

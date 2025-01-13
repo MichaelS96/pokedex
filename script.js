@@ -107,3 +107,25 @@ function switchTab(tabId) {
 
     document.getElementById(tabId).classList.remove('hidden');
 }
+
+function showNextPokemon() {
+    currentPokemonIndex = currentPokemonIndex + 1;
+
+    if (currentPokemonIndex < 0) {
+        currentPokemonIndex = allPokemons.length + 1;
+    }
+
+    const nextPokemon = allPokemons[currentPokemonIndex];
+    openCard(nextPokemon);
+}
+
+function showPreviousPokemon() {
+    currentPokemonIndex = currentPokemonIndex - 1;
+
+    if (currentPokemonIndex < 0) {
+        currentPokemonIndex = allPokemons.length - 1;
+    }
+
+    const previousPokemon = allPokemons[currentPokemonIndex];
+    openCard(previousPokemon);
+}

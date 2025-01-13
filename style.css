@@ -130,7 +130,7 @@ h3 {
 #loadButton:hover {
     background: #ecea60;
     border-color: #CC4444;
-    
+
 }
 
 #loading {
@@ -186,8 +186,14 @@ h3 {
 }
 
 .type-icon {
-    width: 50px!important;
+    width: 50px !important;
     height: 50px;
     margin-top: 5px;
 }
 
+.change-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}

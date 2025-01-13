@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/vnd.icon" href="assets/img/pokemon.favicon.png">
+    <title>Pokedex</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="scripts/db.js"></script>
+    <script src="templates.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body onload="renderPokedex()">
+
+    <header>
+        <img src="assets/img/pokemon.logo.png" alt="Pokémon Logo">
+        <img src="assets/img/pokemon.header.png" alt="Pokémon Logo">
+    </header>
+
+    <div class="pokedex" id="pokedex"></div>
+
+    <div id="loading" </div><img src="assets/img/mew.loading.gif" alt=""></div>
+
+    <div class="pokemon-modal" id="pokemonModal" style="display: none;">
+        <div class="pokemon-modal-content" id="pokemonModalContent">
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <button id="loadButton">Lad mehr Pokémon</button>
+    </footer>
+
+</body>
+
+</html>

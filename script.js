@@ -73,13 +73,11 @@ function createPokemonCard(pokemon) {
     const card = document.createElement('div');
     card.classList.add('pokemon-card');
 
-    card.style.backgroundColor = typeColors[pokemon.types[0].type.name] || '#FFF';
+    // Gradient mit ausgelagerter Funktion erstellen
+    card.style.background = getPokemonGradient(pokemon.types, typeColors);
 
     const formattedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-
-    const pokemonHTML = pokemonTemplates(pokemon, formattedName);
-
-    card.innerHTML = pokemonHTML;
+    card.innerHTML = pokemonTemplates(pokemon, formattedName);
 
     card.onclick = () => openCard(pokemon);
 
@@ -135,4 +133,18 @@ function showPreviousPokemon() {
 
     const previousPokemon = allPokemons[currentPokemonIndex];
     openCard(previousPokemon);
+}
+
+function getPokemonGradient(types, typeColors) {
+    const colors = [];
+    for (let i = 0; i < types.length; i++) {
+        const typeName = types[i].type.name;
+        const color = typeColors[typeName] || '#FFF';
+        colors.push(color);
+    }
+
+    if (colors.length > 1) {
+        return `linear-gradient(80deg, ${colors.join(', ')})`;
+    }
+    return colors[0];
 }

@@ -3,8 +3,7 @@ body {
     margin: 0px;
     padding: 0px;
     max-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
+    height: calc(100vh - 190px - 123px);
 }
 
 header {
@@ -82,7 +81,6 @@ h3 {
 .pokemon-modal-content {
     padding: 32px;
     border-radius: 10px;
-    max-width: 90%;
     width: 500px;
     height: 600px;
     text-align: center;
@@ -121,7 +119,7 @@ h3 {
     padding-bottom: 16px;
     padding-left: 16px;
     background: #FFCB05;
-    color: #f71d1d;
+    color: black;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
@@ -130,7 +128,7 @@ h3 {
 #loadButton:hover {
     background: #ecea60;
     border-color: #CC4444;
-    
+
 }
 
 #loading {
@@ -186,8 +184,45 @@ h3 {
 }
 
 .type-icon {
-    width: 50px!important;
+    width: 50px !important;
     height: 50px;
     margin-top: 5px;
 }
 
+.change-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}
+
+#searchInput {
+    background-color: #FFCB05;
+}
+
+@media (max-width: 794px) {
+    .pokemon-friends {
+        display: none;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    header img {
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 554px) {
+    .pokemon-card {
+        width: 199px;
+        height: 299px;
+    }
+
+    .pokemon-modal-content {
+        max-width: 77%;
+    }
+}

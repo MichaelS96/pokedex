@@ -2,6 +2,8 @@ let currentIndex = 1;
 const limit = 22;
 let pokedex, loadButton, loadingImg, modal, modalContent, searchInput;
 let allPokemons = [];
+let pokedex, loadButton, loadingImg, modal, modalContent, searchInput;
+let allPokemons = [];
 
 function renderPokedex() {
     pokedex = document.getElementById('pokedex');
@@ -9,6 +11,7 @@ function renderPokedex() {
     loadingImg = document.getElementById('loading');
     modal = document.getElementById('pokemonModal');
     modalContent = document.getElementById('pokemonModalContent');
+    searchInput = document.getElementById('searchInput');
     searchInput = document.getElementById('searchInput');
 
     loadButton.onclick = getPokemons;
@@ -24,9 +27,11 @@ async function getPokemons() {
 
         for (let i = currentIndex; i <= end; i++) {
             if (i > 151) break;
+            if (i > 151) break;
 
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
             const pokemonData = await response.json();
+            allPokemons.push(pokemonData);
             allPokemons.push(pokemonData);
             createPokemonCard(pokemonData);
 
@@ -93,11 +98,13 @@ function closeModal() {
 
 async function getMoves(pokemon) {
     const moves = pokemon.moves.slice(0, 4);
+    const moves = pokemon.moves.slice(0, 4);
 
     const moveData = await Promise.all(
         moves.map(async (move) => {
             const response = await fetch(move.move.url);
             const moveDetails = await response.json();
+            const power = moveDetails.power || '0';
             const power = moveDetails.power || '0';
             return {
                 name: move.move.name,
@@ -114,6 +121,28 @@ function switchTab(tabId) {
     contents.forEach(content => content.classList.add('hidden'));
 
     document.getElementById(tabId).classList.remove('hidden');
+}
+
+function showNextPokemon() {
+    currentPokemonIndex = currentPokemonIndex + 1;
+
+    if (currentPokemonIndex < 0) {
+        currentPokemonIndex = allPokemons.length + 1;
+    }
+
+    const nextPokemon = allPokemons[currentPokemonIndex];
+    openCard(nextPokemon);
+}
+
+function showPreviousPokemon() {
+    currentPokemonIndex = currentPokemonIndex - 1;
+
+    if (currentPokemonIndex < 0) {
+        currentPokemonIndex = allPokemons.length - 1;
+    }
+
+    const previousPokemon = allPokemons[currentPokemonIndex];
+    openCard(previousPokemon);
 }
 
 function showNextPokemon() {

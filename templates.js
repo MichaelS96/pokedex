@@ -21,7 +21,13 @@ async function openCard(pokemon) {
     const moves = await getMoves(pokemon);
     const formattedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
-    const types = pokemon.types.map(t => t.type.name).join(', ');
+    let types = '';
+    for (let i = 0; i < pokemon.types.length; i++) {
+        types += pokemon.types[i].type.name;
+        if (i < pokemon.types.length - 1) {
+            types += ', ';
+        }
+    }
 
     modalContent.innerHTML = `
         <button onclick="closeModal()">
@@ -48,8 +54,8 @@ async function openCard(pokemon) {
         </div>
         <div id="attacks" class="tab-content hidden">
             ${moves.map(move =>
-        `<p>${move.name}: ${move.power} dmg</p>`
-    ).join('')}
+                `<p>${move.name}: ${move.power || 'N/A'} dmg</p>`
+            ).join('')}
         </div>
         <div class="change-card">
             <button onclick="showPreviousPokemon()">Zurück</button>

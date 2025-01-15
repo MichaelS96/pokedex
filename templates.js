@@ -42,6 +42,7 @@ async function openCard(pokemon) {
             <button class="tab-button" onclick="switchTab('main')">Main</button>
             <button class="tab-button" onclick="switchTab('stats')">Stats</button>
             <button class="tab-button" onclick="switchTab('attacks')">Attacks</button>
+            <button class="tab-button-shiny" onclick="switchTab('shiny')">Shiny</button>
         </div>
         <div id="main" class="tab-content">
             <p>Height: ${pokemon.height / 10} m</p>
@@ -57,8 +58,11 @@ async function openCard(pokemon) {
         </div>
         <div id="attacks" class="tab-content hidden">
             ${moves.map(move =>
-                `<p>${move.name}: ${move.power || 'N/A'} dmg</p>`
-            ).join('')}
+        `<p>${move.name}: ${move.power} dmg</p>`
+    ).join('')}
+        </div>
+        <div id="shiny" class="tab-content hidden">
+            <img src="${pokemon.sprites.other['official-artwork'].front_shiny}" alt="Shiny ${formattedName}">
         </div>
         <div class="change-card">
             <button onclick="showPreviousPokemon()">Zurück</button>

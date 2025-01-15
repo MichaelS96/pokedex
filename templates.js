@@ -17,7 +17,10 @@ function pokemonTemplates(pokemon, formattedName) {
 
 async function openCard(pokemon) {
     modal.style.display = 'flex';
-    modalContent.style.backgroundColor = typeColors[pokemon.types[0].type.name] || '#FFF';
+
+    // Hintergrund-Gradient anwenden
+    modalContent.style.background = getPokemonGradient(pokemon.types, typeColors);
+
     const moves = await getMoves(pokemon);
     const formattedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 

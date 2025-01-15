@@ -116,8 +116,8 @@ function switchTab(tabId) {
 function showNextPokemon() {
     currentPokemonIndex = currentPokemonIndex + 1;
 
-    if (currentPokemonIndex < 0) {
-        currentPokemonIndex = allPokemons.length + 1;
+    if (currentPokemonIndex >= allPokemons.length) {
+        currentPokemonIndex = 0; // Zum ersten Pokémon springen
     }
 
     const nextPokemon = allPokemons[currentPokemonIndex];
@@ -128,7 +128,7 @@ function showPreviousPokemon() {
     currentPokemonIndex = currentPokemonIndex - 1;
 
     if (currentPokemonIndex < 0) {
-        currentPokemonIndex = allPokemons.length - 1;
+        currentPokemonIndex = allPokemons.length - 1; // Zum letzten Pokémon springen
     }
 
     const previousPokemon = allPokemons[currentPokemonIndex];

@@ -1,13 +1,6 @@
-function pokemonTemplates(pokemon, formattedName) {
-    const cardImage = `<img src="${pokemon.sprites.front_default}" alt="${formattedName}">`;
-
-    const typeIcons = pokemon.types.map(t => {
-        const typeIcon = typeImages[t.type.name] || 'assets/img/typenpokemon/default.png';
-        return `<img src="${typeIcon}" alt="${t.type.name}" class="type-icon">`;
-    }).join('');
-
+function pokemonCardTemplate({ id, formattedName, cardImage, typeIcons }) {
     return `
-        <div><strong>#${pokemon.id}</strong>
+        <div><strong>#${id}</strong>
             <div class='pokemon-card-img'>${cardImage}</div>
             <h3>${formattedName}</h3>
             <div class="type-icons">${typeIcons}</div>
@@ -15,24 +8,8 @@ function pokemonTemplates(pokemon, formattedName) {
     `;
 }
 
-async function openCard(pokemon) {
-    modal.style.display = 'flex';
-
-    // Hintergrund-Gradient anwenden
-    modalContent.style.background = getPokemonGradient(pokemon.types, typeColors);
-
-    const moves = await getMoves(pokemon);
-    const formattedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-
-    let types = '';
-    for (let i = 0; i < pokemon.types.length; i++) {
-        types += pokemon.types[i].type.name;
-        if (i < pokemon.types.length - 1) {
-            types += ', ';
-        }
-    }
-
-    modalContent.innerHTML = `
+function generatePokemonTemplate(pokemon, types, moves, formattedName) {
+    return `
         <button onclick="closeModal()">
             <img src="assets/img/x.png" alt="Close" style="width: 20px; height: 20px;">
         </button>
@@ -58,16 +35,16 @@ async function openCard(pokemon) {
         </div>
         <div id="attacks" class="tab-content hidden">
             ${moves.map(move =>
-        `<p>${move.name}: ${move.power} dmg</p>`
-    ).join('')}
+                `<p>${move.name}: ${move.power} dmg</p>`
+            ).join('')}
         </div>
         <div id="shiny" class="tab-content hidden">
             <img src="${pokemon.sprites.other['official-artwork'].front_shiny}" alt="Shiny ${formattedName}">
         </div>
         <div class="change-card">
-            <button onclick="showPreviousPokemon()">Zurück</button>
-            <button onclick="showNextPokemon()">Vor</button>
+            <button onclick="showPreviousPokemon()">&#9664;</button>
+            <button onclick="showNextPokemon()">&#9654;</button>
         </div>
     `;
-    currentPokemonIndex = allPokemons.findIndex(p => p.id === pokemon.id);
 }
+

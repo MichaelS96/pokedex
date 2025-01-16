@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="./style.css">
     <script src="scripts/db.js"></script>
-    <script src="templates.js"></script>
+    <script src="scripts/templates.js"></script>
     <script src="script.js"></script>
 </head>
 
@@ -17,13 +17,18 @@
 
     <header>
         <img src="assets/img/pokemon.logo.png" alt="Pokémon Logo">
-        <input type="text" id="searchInput" placeholder="Suche nach einem Pokémon..." oninput="filterPokemons()" />
+        <input type="text" id="searchInput" placeholder="Suche ein Pokémon...." oninput="filterPokemons()" />
         <img class="pokemon-friends" src="assets/img/pokemon.header.png" alt="Pokémon Logo">
     </header>
-
+    
     <div class="pokedex" id="pokedex"></div>
 
     <div id="loading"><img src="assets/img/mew.loading.gif" alt=""></div>
+
+    <div id="noResults" class="centered-gif" style="display: none;">
+        <img src="assets/img/no-result.gif" alt="No Pokemon found">
+        <p class="no-result-p">Kein Pokémon gefunden. Versuche es mit einem anderen.</p>
+    </div>
 
     <div class="pokemon-modal" id="pokemonModal" style="display: none;">
         <div class="pokemon-modal-content" id="pokemonModalContent">
